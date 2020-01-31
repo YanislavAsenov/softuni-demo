@@ -1,0 +1,31 @@
+name: 'Development - Build and Deploy'
+
+on:
+  push:
+    branches: 
+      - development
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@master
+      with:
+        dotnet-version: 3.1.100
+    - name: Build
+      run: dotnet build ./SoftUniDemo/SoftUniDemo.csproj --configuration Release
+    - name: 'Run Tests'
+      run: dotnet test ./SoftUniTests/SoftUniDemoTests.csproj
+    - name: Publish
+      run: |
+        dotnet publish ./SoftUniDemo/SoftUniDemo.csproj -c Release -o ./SoftUniDemoDevelopment
+    - name: Deploy
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: development-softuni-demo
+        publish-profile: ${{ secrets.PUBLISH_PROFILE_DEVELOPMENT }}
+        package: './SoftUniDemoDevelopment'
