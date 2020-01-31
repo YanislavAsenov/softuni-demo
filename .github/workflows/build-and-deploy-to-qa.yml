@@ -12,8 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-        with:
-          ref: 'qa'
+      with:
+        ref: 'qa'
     - name: Setup .NET Core
       uses: actions/setup-dotnet@master
       with:
