@@ -19,7 +19,7 @@ jobs:
     - name: Build
       run: dotnet build ./SoftUniDemo/SoftUniDemo.csproj --configuration Release
     - name: 'Run Tests'
-      run: dotnet test ./SoftUniTests/SoftUniDemoTests.csproj
+      run: dotnet test ./SoftUniDemoTests/SoftUniDemoTests.csproj
     - name: Publish
       run: |
         dotnet publish ./SoftUniDemo/SoftUniDemo.csproj -c Release -o ./SoftUniDemoDevelopment
